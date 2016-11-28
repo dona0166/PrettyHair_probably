@@ -8,11 +8,14 @@ using System.Data.SqlClient;
 
 namespace Core
 {
-    class OrderRepository
+    public class OrderRepository
     {
         private static string connectionString =
             "Server=ealdb1.eal.local;Database=ejl70_db;User Id=ejl70_usr;Password=Baz1nga70;";
-        
+        public bool event_state;
+        public event EventHandler Fire;
+        public EventArgs e = null;
+        public delegate void EventHandler(OrderRepository newestOrder, EventArgs e);
         public void insertNewOrder(Order newest_order)
         {
             
@@ -25,19 +28,34 @@ namespace Core
                     SqlCommand cmd = new SqlCommand("insertNewOrder", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add(new SqlParameter("@id", newest_order.Id));
-                    cmd.Parameters.Add(new SqlParameter("@quantity", newest_order.Quantity));
-                    cmd.Parameters.Add(new SqlParameter("@order_date", newest_order.OrderDate));
-                    cmd.Parameters.Add(new SqlParameter("@delivery_date", newest_order.DeliveryDate));
+                    cmd.Parameters.Add(new SqlParameter("@OrderQuantity", newest_order.Quantity));
+                    cmd.Parameters.Add(new SqlParameter("@OrderDate", newest_order.OrderDate));
+                    cmd.Parameters.Add(new SqlParameter("@DeliveryDate", newest_order.DeliveryDate));
 
                     cmd.ExecuteNonQuery();
+                    FireEvent();
+
+                    
                 }
-                catch(Exception e)
+      
+                catch(Exception ex)
                 {
-                    Console.WriteLine("USP" + e.Message);
+                    Console.WriteLine("USP" + ex.Message);
                 }
                 
             }
         }
+        
+        public void FireEvent()
+        {
+            
+            
+            
+                Fire(this, e);
+                   
+            
+            
+        }
     }
 }
+ 

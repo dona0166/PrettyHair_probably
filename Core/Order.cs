@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class Order
+    public class Order
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
