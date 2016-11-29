@@ -48,14 +48,10 @@ namespace Core
         
         public void FireEvent()
         {
-            
-            
-            
-                Fire(this, e);
-                   
-            
-            
+            Fire(this, e);
         }
+
+
     }
 }
  

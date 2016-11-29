@@ -21,7 +21,8 @@ namespace PrettyHair_probably
         {
             
             Console.Clear();
-            
+            Program myprogram = new Program();
+
             try
             {
                 
@@ -30,20 +31,8 @@ namespace PrettyHair_probably
                 switch (choice)
                 {
                     case "1" :
-                        Console.WriteLine("Insert the Order's parameters:");
-                        Console.WriteLine("ID:");
-                        int id = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Quantity:");
-                        int quantity = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Order Date:");
-                        DateTime o_date = Convert.ToDateTime(Console.ReadLine());
-                        Console.WriteLine("Delivery Date:");
-                        DateTime d_date = Convert.ToDateTime(Console.ReadLine());
-
-                        Core.Order myorder = new Core.Order(id, quantity, o_date, d_date);
-                        Core.OrderRepository myorderrepository = new OrderRepository();
-                        Core.Email email = new Email();
-                        myorderrepository.insertNewOrder(myorder);
+                        
+                        myprogram.running1();
                         break;
                     
                     case "0" :
@@ -59,6 +48,24 @@ namespace PrettyHair_probably
 
 
 
+        }
+        
+        public void running1()
+        {
+            Console.WriteLine("Insert the Order's parameters:");
+            Console.WriteLine("Quantity:");
+            int quantity = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Order Date:");
+            DateTime o_date = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine("Delivery Date:");
+            DateTime d_date = Convert.ToDateTime(Console.ReadLine());
+
+            Core.Order myorder = new Core.Order(quantity, o_date, d_date);
+            Core.OrderRepository myorderrepository = new OrderRepository();
+            Core.Email email = new Email();
+            email.Subscribe(myorderrepository);
+            myorderrepository.insertNewOrder(myorder);
+            
         }
     }
 }

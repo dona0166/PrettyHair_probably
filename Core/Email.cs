@@ -14,7 +14,7 @@ namespace Core
         }
         private void EmailMessage(OrderRepository newest_order, EventArgs e)
         {
-            System.Console.WriteLine("This is your new order");
+            System.Console.WriteLine("This is your new order, bla bla bla - Here your content");
         }
     }
 }
