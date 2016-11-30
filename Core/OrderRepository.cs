@@ -15,6 +15,8 @@ namespace Core
         public bool event_state;
         public event EventHandler Fire;
         public EventArgs e = null;
+        //Delegate[] mydelegate;
+        //public Email an_email = new Email();
         public delegate void EventHandler(OrderRepository newestOrder, EventArgs e);
         public void insertNewOrder(Order newest_order)
         {
@@ -33,7 +35,9 @@ namespace Core
                     cmd.Parameters.Add(new SqlParameter("@DeliveryDate", newest_order.DeliveryDate));
 
                     cmd.ExecuteNonQuery();
-                    FireEvent();
+                    FireEvent(newest_order.Quantity);
+                    
+                    
 
                     
                 }
@@ -46,10 +50,26 @@ namespace Core
             }
         }
         
-        public void FireEvent()
+        public void FireEvent(int quantity, int limit = 60)
         {
-            Fire(this, e);
+            if(quantity < limit)
+            {
+                Fire(this, e);
+                //mydelegate[0].Method.Invoke(an_email.EmailMessage);
+                //an_email.AlertAmount(this,e);
+
+            }
+            else
+            {
+                Console.WriteLine("Amount inadequate");
+            }
         }
+
+        //public void GetEvents()
+        //{
+        //    mydelegate = Fire.GetInvocationList();
+        //}
+
 
 
     }

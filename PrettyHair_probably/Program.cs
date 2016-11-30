@@ -60,12 +60,14 @@ namespace PrettyHair_probably
             Console.WriteLine("Delivery Date:");
             DateTime d_date = Convert.ToDateTime(Console.ReadLine());
 
-            Core.Order myorder = new Core.Order(quantity, o_date, d_date);
-            Core.OrderRepository myorderrepository = new OrderRepository();
-            Core.Email email = new Email();
-            email.Subscribe(myorderrepository);
+            Core.Order myorder = new Core.Order(quantity, o_date, d_date, true);
+            Core.OrderRepository myorderrepository = new Core.OrderRepository();
+            Core.Email email = new Core.Email();
+            Core.EmailRepository emailrep = new Core.EmailRepository();
+
             myorderrepository.insertNewOrder(myorder);
-            
+            emailrep.Subscribe(myorderrepository);
+            emailrep.EmailContent(email, myorder);
         }
     }
 }
