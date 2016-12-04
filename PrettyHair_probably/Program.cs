@@ -52,15 +52,18 @@ namespace PrettyHair_probably
         
         public void running1()
         {
+            
             Console.WriteLine("Insert the Order's parameters:");
             Console.WriteLine("Quantity:");
             int quantity = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Description:");
+            string description = Console.ReadLine();
             Console.WriteLine("Order Date:");
             DateTime o_date = Convert.ToDateTime(Console.ReadLine());
             Console.WriteLine("Delivery Date:");
             DateTime d_date = Convert.ToDateTime(Console.ReadLine());
 
-            Core.Order myorder = new Core.Order(quantity, o_date, d_date, true);
+            Core.Order myorder = new Core.Order(quantity, description, o_date, d_date, true);
             Core.OrderRepository myorderrepository = new Core.OrderRepository();
             Core.Email email = new Core.Email();
             Core.EmailRepository emailrep = new Core.EmailRepository();

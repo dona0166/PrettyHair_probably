@@ -30,6 +30,7 @@ namespace Core
                     SqlCommand cmd = new SqlCommand("insertNewOrder", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    cmd.Parameters.Add(new SqlParameter("@OrderDescription", newest_order.Description));
                     cmd.Parameters.Add(new SqlParameter("@OrderQuantity", newest_order.Quantity));
                     cmd.Parameters.Add(new SqlParameter("@OrderDate", newest_order.OrderDate));
                     cmd.Parameters.Add(new SqlParameter("@DeliveryDate", newest_order.DeliveryDate));
